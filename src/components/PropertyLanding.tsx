@@ -5,6 +5,8 @@ import Lenis from "lenis";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { Language, PropertyData } from "@/types/property";
+import InquiryForm from "./InquiryForm";
+import WhatsAppFloat from "./WhatsAppFloat";
 
 const languageOptions: { code: Language; label: string; flag: string }[] = [
   { code: "en", label: "English", flag: "🇬🇧" },
@@ -374,23 +376,18 @@ export default function PropertyLanding({ data }: { data: PropertyData }) {
           className="absolute inset-0 h-full w-full opacity-65"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/20 to-black/75" />
-        <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center text-[color:var(--cream)]">
-          <FadeIn>
+        <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 pb-28 pt-28 text-center text-[color:var(--cream)]">
+          <FadeIn className="w-full">
             <p className="mb-6 text-[11px] uppercase tracking-[0.42em] text-[color:var(--sand)]">
               {t.finalKicker}
             </p>
-            <h2 className="font-display text-balance text-6xl leading-[0.9] tracking-[-0.03em] md:text-8xl">
+            <h2 className="font-display text-balance text-5xl leading-[0.9] tracking-[-0.03em] md:text-7xl">
               {t.finalTitle}
             </h2>
             <p className="mx-auto mt-8 max-w-xl text-lg font-light leading-relaxed text-white/75">
               {t.finalText}
             </p>
-            <a
-              href={`mailto:${data.reserveEmail}`}
-              className="mt-10 inline-flex border border-white/40 px-8 py-4 text-[11px] uppercase tracking-[0.28em] transition hover:bg-white hover:text-[color:var(--brown)]"
-            >
-              {t.reserve}
-            </a>
+            <InquiryForm data={data} language={language} />
           </FadeIn>
         </div>
         <footer className="absolute bottom-0 left-0 z-20 flex w-full flex-col gap-4 px-6 py-8 text-[10px] uppercase tracking-[0.24em] text-white/45 md:flex-row md:items-center md:justify-between md:px-12">
@@ -398,6 +395,8 @@ export default function PropertyLanding({ data }: { data: PropertyData }) {
           <p>{t.heroSubtitle}</p>
         </footer>
       </section>
+
+      <WhatsAppFloat data={data} language={language} />
     </main>
   );
 }

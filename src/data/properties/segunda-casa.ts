@@ -8,6 +8,8 @@ export const segundaCasaProperty: PropertyData = {
   slug: "segunda-casa",
   brandName: "Casa del Río",
   reserveEmail: "reservations@example.com",
+  // TODO: reemplazar por el WhatsApp real de la segunda casa (solo dígitos).
+  whatsappNumber: "5492610000000",
   locationDetails: ["Ubicación a confirmar", "Región de los lagos", "Acceso por camino de ripio", "A definir"],
   images: {
     hero: "https://picsum.photos/seed/casa-rio-hero/2400/1600",

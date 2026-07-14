@@ -37,6 +37,12 @@ http://localhost:3000
 
 Todo el contenido visible (textos en los 3 idiomas, imágenes, suites, ubicación) vive en el archivo de datos de esa propiedad dentro de `src/data/properties/`. No hace falta tocar el componente visual para cambiar textos o fotos.
 
+**Importante:** cada propiedad tiene un campo `whatsappNumber` (solo dígitos, con código de país) que alimenta el formulario de consulta y el botón flotante de WhatsApp. Hoy es un número de ejemplo — reemplazalo por el real de Cecilia.
+
+## Contacto: WhatsApp e inquiry form
+
+Cada landing tiene un formulario de consulta (`src/components/InquiryForm.tsx`) y un botón flotante (`src/components/WhatsAppFloat.tsx`). No necesitan backend: al enviar, arman un mensaje pre-cargado y abren WhatsApp (`wa.me`) con los datos que cargó el visitante (nombre, fechas, personas, mensaje), traducido al idioma activo.
+
 ## Acceso al panel (login)
 
 El panel está protegido con un login del lado del servidor:
@@ -56,8 +62,10 @@ fuerte en `ADMIN_PASSWORD` y generá el `AUTH_SECRET` con
 En Vercel, cargá esas tres variables en la configuración del proyecto. Después de
 cambiar el `.env.local` hay que reiniciar `npm run dev`.
 
-Endurecimiento pendiente para más adelante: límite de intentos (rate limiting)
-contra fuerza bruta, y credenciales por usuario cuando exista la base de datos.
+El login tiene **rate limiting** (`src/lib/rateLimit.ts`): 5 intentos fallidos por
+IP en 10 minutos y después devuelve 429. Es en memoria (por instancia del
+servidor); para algo distribuido haría falta un store compartido (Redis/Upstash).
+Pendiente para más adelante: credenciales por usuario cuando exista la base de datos.
 
 ## Panel de reservas (`/panel`)
 

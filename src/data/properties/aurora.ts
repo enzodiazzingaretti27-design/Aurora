@@ -4,6 +4,8 @@ export const auroraProperty: PropertyData = {
   slug: "aurora",
   brandName: "Aurora",
   reserveEmail: "reservations@auroraretreat.com",
+  // TODO: reemplazar por el WhatsApp real de Cecilia (código país + área, solo dígitos).
+  whatsappNumber: "5492610000000",
   locationDetails: ["33.0167° S", "68.8667° W", "Uco Valley road", "900m above sea level"],
   images: {
     hero:

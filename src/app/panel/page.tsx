@@ -22,7 +22,9 @@ import {
 
 type PropertyFilter = "all" | PropertySlug;
 
-const today = new Date(2026, 6, 14); // referencia mientras usamos datos de ejemplo
+// Hoy a medianoche local, para comparar por día sin que la hora corte reservas.
+const today = new Date();
+today.setHours(0, 0, 0, 0);
 
 function formatMoney(amount?: number, currency?: string): string {
   if (amount == null) return "—";

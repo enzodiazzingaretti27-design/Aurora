@@ -5,6 +5,17 @@ import {
   SESSION_TTL,
   createSessionToken,
 } from "@/lib/auth";
+import {
+  checkRateLimit,
+  clearAttempts,
+  registerFailedAttempt,
+} from "@/lib/rateLimit";
+
+function clientKey(request: Request): string {
+  const forwarded = request.headers.get("x-forwarded-for");
+  const ip = forwarded ? forwarded.split(",")[0].trim() : "";
+  return ip || "unknown";
+}
 
 /** Comparación en tiempo constante, robusta ante longitudes distintas. */
 function safeEqual(a: string, b: string): boolean {
@@ -30,6 +41,19 @@ export async function POST(request: Request) {
     );
   }
 
+  const key = clientKey(request);
+  const limit = checkRateLimit(key);
+  if (!limit.allowed) {
+    return NextResponse.json(
+      {
+        error: `Demasiados intentos. Probá de nuevo en ${Math.ceil(
+          (limit.retryAfterSeconds ?? 0) / 60
+        )} minutos.`,
+      },
+      { status: 429 }
+    );
+  }
+
   let user = "";
   let password = "";
   try {
@@ -43,12 +67,14 @@ export async function POST(request: Request) {
   const okUser = safeEqual(user, expectedUser);
   const okPassword = safeEqual(password, expectedPassword);
   if (!okUser || !okPassword) {
+    registerFailedAttempt(key);
     return NextResponse.json(
       { error: "Usuario o contraseña incorrectos." },
       { status: 401 }
     );
   }
 
+  clearAttempts(key);
   const token = await createSessionToken(expectedUser, secret);
   const response = NextResponse.json({ ok: true });
   response.cookies.set(SESSION_COOKIE, token, {
