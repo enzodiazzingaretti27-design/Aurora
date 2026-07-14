@@ -1,92 +1,95 @@
-# Aurora — Luxury Countryside Retreat Template
+# Cecilia — Hospedajes
 
-A cinematic single-page landing template for a fictional luxury estancia retreat near Mendoza, Argentina.
+Sitio web para las dos casas de Cecilia. Página principal (`/`) con las dos propiedades, y una landing cinemática dedicada a cada una (`/aurora`, `/segunda-casa`).
 
-Built as a premium, editable brand presentation with:
+Construido con:
 
 - **Next.js App Router**
 - **TypeScript**
 - **Tailwind CSS**
 - **Framer Motion**
 - **Lenis smooth scrolling**
-- **Multi-language selector**
-- **Responsive editorial layout**
+- **Selector de idioma (en/es/pt)**
 
-## Local development
+## Desarrollo local
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open:
+Abrir:
 
 ```text
 http://localhost:3000
 ```
 
-## Editable content
+## Estructura
 
-Most visible content lives in:
+- `src/app/page.tsx` — hub con las dos propiedades.
+- `src/app/[property]/page.tsx` — ruta dinámica que renderiza la landing de cada propiedad.
+- `src/components/PropertyLanding.tsx` — la plantilla visual compartida (secciones, animaciones, selector de idioma).
+- `src/data/properties/aurora.ts` — contenido real de Aurora (Mendoza).
+- `src/data/properties/segunda-casa.ts` — contenido **placeholder/temporal** de la segunda casa (marcado con TODO). Reemplazar fotos, textos y ubicación cuando estén disponibles.
+- `src/data/properties/index.ts` — registro de propiedades. Agregar una propiedad nueva es: crear su archivo de datos con el mismo shape (`PropertyData` en `src/types/property.ts`) y sumarlo acá.
 
-```text
-src/app/page.tsx
-```
+## Editar contenido de una propiedad
 
-Inside that file, edit:
+Todo el contenido visible (textos en los 3 idiomas, imágenes, suites, ubicación) vive en el archivo de datos de esa propiedad dentro de `src/data/properties/`. No hace falta tocar el componente visual para cambiar textos o fotos.
 
-- **Translations:** `copy`
-- **Images:** `images`
-- **Gallery labels:** `copy.en.gallery`, `copy.es.gallery`, `copy.pt.gallery`
-- **Suites:** `copy.[language].suites`
-- **Navigation:** `copy.[language].nav`
+## Acceso al panel (login)
 
-## Languages
+El panel está protegido con un login del lado del servidor:
 
-The template includes:
+- La ruta `/panel` está protegida por `src/proxy.ts` (la convención "middleware"
+  de Next.js 16, ahora llamada **proxy**). Sin sesión válida, redirige a `/login`.
+- Las credenciales viven en variables de entorno (`.env.local`, nunca en el
+  código): `ADMIN_USER`, `ADMIN_PASSWORD` y `AUTH_SECRET`. Ver `.env.example`.
+- Al iniciar sesión, `/api/login` valida la contraseña (comparación en tiempo
+  constante) y emite una **cookie de sesión firmada con HMAC y httpOnly** que
+  vence a las 12 h. `/api/logout` la borra. La lógica de firma está en
+  `src/lib/auth.ts`.
 
-- **English**
-- **Spanish**
-- **Portuguese**
+**Primer uso / deploy:** copiá `.env.example` a `.env.local`, poné una contraseña
+fuerte en `ADMIN_PASSWORD` y generá el `AUTH_SECRET` con
+`node -e "console.log(require('crypto').randomBytes(48).toString('base64url'))"`.
+En Vercel, cargá esas tres variables en la configuración del proyecto. Después de
+cambiar el `.env.local` hay que reiniciar `npm run dev`.
 
-The language selector is rendered in the navbar with flags.
+Endurecimiento pendiente para más adelante: límite de intentos (rate limiting)
+contra fuerza bruta, y credenciales por usuario cuando exista la base de datos.
 
-## Brand customization
+## Panel de reservas (`/panel`)
 
-Global colors, typography helpers, grain overlay and base styles are in:
+Ya existe una primera versión del panel en `/panel`, funcionando con **datos de
+ejemplo** (`src/data/reservations.ts`). Incluye:
 
-```text
-src/app/globals.css
-```
+- Calendario mensual por casa (o ambas juntas), con las reservas pintadas por
+  color según la fuente: Airbnb, Booking o Directa.
+- Filtro por propiedad y navegación entre meses.
+- Registro en tabla con entrada/salida, noches, huésped, teléfono, monto y notas.
+  Las reservas sin datos de huésped aparecen marcadas como "A completar".
 
-Fonts are configured in:
+Archivos clave: `src/app/panel/page.tsx`, `src/components/ReservationCalendar.tsx`,
+`src/types/reservation.ts`, `src/lib/dates.ts`.
 
-```text
-src/app/layout.tsx
-```
+### Próximo paso (sincronización real)
 
-Current font pairing:
+Todavía pendiente, para cuando Cecilia tenga los links iCal:
 
-- **Cormorant Garamond**
-- **Inter Tight**
+- Cada propiedad tendrá 2 links iCal (export calendar de Airbnb y de Booking.com).
+- Un endpoint de sincronización parsea esos iCal y guarda las reservas en una base
+  de datos (upsert por id externo, sin pisar los datos cargados a mano).
+- Proteger `/panel` con contraseña y permitir **editar** los datos de cada huésped
+  (nombre, teléfono, monto) — hoy el registro es de solo lectura.
 
-## Production build
+## Build de producción
 
 ```bash
 npm run build
 npm run start
 ```
 
-## Deployment
+## Deploy
 
-Recommended deploy target:
-
-- **Vercel**
-
-Build command:
-
-```bash
-npm run build
-```
-
-Output is handled automatically by Next.js.
+Recomendado: **Vercel**.

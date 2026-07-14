@@ -1,0 +1,105 @@
+import type { Reservation } from "@/types/reservation";
+
+// Datos de ejemplo (seed) para ver cómo funciona el panel mientras no haya
+// sincronización real. Cuando Cecilia tenga los links iCal de Airbnb y Booking,
+// estas reservas se van a poblar solas y los campos manuales (huésped, teléfono,
+// monto) se completan a mano desde el panel. Fecha de referencia: julio 2026.
+export const reservations: Reservation[] = [
+  // ── Aurora ──────────────────────────────────────────────
+  {
+    id: "a1",
+    propertySlug: "aurora",
+    source: "airbnb",
+    checkIn: "2026-07-04",
+    checkOut: "2026-07-09",
+    guestName: "María Fernández",
+    guestPhone: "+54 9 261 555 1234",
+    amount: 420000,
+    currency: "ARS",
+    notes: "Llega 15 hs. Pidió botella de Malbec.",
+  },
+  {
+    id: "a2",
+    propertySlug: "aurora",
+    source: "booking",
+    checkIn: "2026-07-11",
+    checkOut: "2026-07-15",
+    guestName: "John Carter",
+    guestPhone: "+1 415 555 0199",
+    amount: 380000,
+    currency: "ARS",
+  },
+  {
+    id: "a3",
+    propertySlug: "aurora",
+    source: "airbnb",
+    checkIn: "2026-07-18",
+    checkOut: "2026-07-21",
+    // Sin datos de huésped todavía: así se ve una reserva recién sincronizada.
+  },
+  {
+    id: "a4",
+    propertySlug: "aurora",
+    source: "direct",
+    checkIn: "2026-07-25",
+    checkOut: "2026-07-30",
+    guestName: "Familia Gómez",
+    guestPhone: "+54 9 11 4444 8888",
+    amount: 500000,
+    currency: "ARS",
+    notes: "Reserva directa por WhatsApp. Seña pagada.",
+  },
+  {
+    id: "a5",
+    propertySlug: "aurora",
+    source: "booking",
+    checkIn: "2026-08-02",
+    checkOut: "2026-08-06",
+    guestName: "Sophie Meyer",
+  },
+
+  // ── Casa del Río ────────────────────────────────────────
+  {
+    id: "r1",
+    propertySlug: "segunda-casa",
+    source: "booking",
+    checkIn: "2026-07-07",
+    checkOut: "2026-07-12",
+    guestName: "Lucas Pereira",
+    guestPhone: "+55 51 99999 0000",
+    amount: 310000,
+    currency: "ARS",
+  },
+  {
+    id: "r2",
+    propertySlug: "segunda-casa",
+    source: "airbnb",
+    checkIn: "2026-07-14",
+    checkOut: "2026-07-17",
+    guestName: "Ana Ruiz",
+    guestPhone: "+54 9 294 555 2211",
+    amount: 240000,
+    currency: "ARS",
+    notes: "Viaja con perro.",
+  },
+  {
+    id: "r3",
+    propertySlug: "segunda-casa",
+    source: "direct",
+    checkIn: "2026-07-22",
+    checkOut: "2026-07-26",
+    // Falta cargar monto y teléfono.
+    guestName: "Pareja aniversario",
+  },
+  {
+    id: "r4",
+    propertySlug: "segunda-casa",
+    source: "airbnb",
+    checkIn: "2026-08-01",
+    checkOut: "2026-08-04",
+    guestName: "The Wilson family",
+    guestPhone: "+44 7700 900123",
+    amount: 290000,
+    currency: "ARS",
+  },
+];

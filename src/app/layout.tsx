@@ -15,9 +15,8 @@ const interTight = Inter_Tight({
 });
 
 export const metadata: Metadata = {
-  title: "Aurora — Luxury Countryside Retreat",
-  description:
-    "A cinematic luxury estancia retreat near Mendoza, Argentina. Silence, wine, mountain air, and slow countryside living.",
+  title: "Cecilia — Hospedajes",
+  description: "Dos casas para alquilar: Aurora en Mendoza y Casa del Río.",
 };
 
 export default function RootLayout({
