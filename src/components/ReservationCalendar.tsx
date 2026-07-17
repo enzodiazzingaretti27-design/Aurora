@@ -2,6 +2,7 @@
 
 import type { Reservation } from "@/types/reservation";
 import { sourceMeta } from "@/types/reservation";
+import { properties } from "@/data/properties";
 import {
   isSameDay,
   monthGrid,
@@ -67,8 +68,11 @@ export default function ReservationCalendar({
               <div className="space-y-0.5">
                 {dayReservations.map((r) => {
                   const meta = sourceMeta[r.source];
+                  const property = properties[r.propertySlug];
                   const label = r.guestName ?? `${meta.label} · sin datos`;
-                  const aria = `${meta.label} — ${r.guestName ?? "sin datos de huésped"}. Editar.`;
+                  const aria = `${property.shortName}. ${meta.label} — ${
+                    r.guestName ?? "sin datos de huésped"
+                  }. Editar.`;
                   return (
                     <button
                       key={r.id}
@@ -81,7 +85,7 @@ export default function ReservationCalendar({
                     >
                       {showProperty && (
                         <span className="opacity-80">
-                          {r.propertySlug === "aurora" ? "A · " : "R · "}
+                          {property.shortName.charAt(0)} ·{" "}
                         </span>
                       )}
                       {label}

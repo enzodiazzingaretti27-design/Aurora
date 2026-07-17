@@ -55,6 +55,8 @@ export interface PropertyImages {
 export interface PropertyData {
   slug: string;
   brandName: string;
+  /** Nombre corto para espacios angostos (chips del calendario, etiquetas). */
+  shortName: string;
   reserveEmail: string;
   /** Número de WhatsApp con código de país, solo dígitos (ej. "5492610000000"). */
   whatsappNumber: string;

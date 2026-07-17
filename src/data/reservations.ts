@@ -5,10 +5,10 @@ import type { Reservation } from "@/types/reservation";
 // estas reservas se van a poblar solas y los campos manuales (huésped, teléfono,
 // monto) se completan a mano desde el panel. Fecha de referencia: julio 2026.
 export const reservations: Reservation[] = [
-  // ── Aurora ──────────────────────────────────────────────
+  // ── Casa Maipú ──────────────────────────────────────────────
   {
     id: "a1",
-    propertySlug: "aurora",
+    propertySlug: "maipu",
     source: "airbnb",
     checkIn: "2026-07-04",
     checkOut: "2026-07-09",
@@ -20,7 +20,7 @@ export const reservations: Reservation[] = [
   },
   {
     id: "a2",
-    propertySlug: "aurora",
+    propertySlug: "maipu",
     source: "booking",
     checkIn: "2026-07-11",
     checkOut: "2026-07-15",
@@ -31,7 +31,7 @@ export const reservations: Reservation[] = [
   },
   {
     id: "a3",
-    propertySlug: "aurora",
+    propertySlug: "maipu",
     source: "airbnb",
     checkIn: "2026-07-18",
     checkOut: "2026-07-21",
@@ -39,7 +39,7 @@ export const reservations: Reservation[] = [
   },
   {
     id: "a4",
-    propertySlug: "aurora",
+    propertySlug: "maipu",
     source: "direct",
     checkIn: "2026-07-25",
     checkOut: "2026-07-30",
@@ -51,17 +51,17 @@ export const reservations: Reservation[] = [
   },
   {
     id: "a5",
-    propertySlug: "aurora",
+    propertySlug: "maipu",
     source: "booking",
     checkIn: "2026-08-02",
     checkOut: "2026-08-06",
     guestName: "Sophie Meyer",
   },
 
-  // ── Casa del Río ────────────────────────────────────────
+  // ── Alto Dique Potrerillos ────────────────────────────────────────
   {
     id: "r1",
-    propertySlug: "segunda-casa",
+    propertySlug: "potrerillos",
     source: "booking",
     checkIn: "2026-07-07",
     checkOut: "2026-07-12",
@@ -72,7 +72,7 @@ export const reservations: Reservation[] = [
   },
   {
     id: "r2",
-    propertySlug: "segunda-casa",
+    propertySlug: "potrerillos",
     source: "airbnb",
     checkIn: "2026-07-14",
     checkOut: "2026-07-17",
@@ -84,7 +84,7 @@ export const reservations: Reservation[] = [
   },
   {
     id: "r3",
-    propertySlug: "segunda-casa",
+    propertySlug: "potrerillos",
     source: "direct",
     checkIn: "2026-07-22",
     checkOut: "2026-07-26",
@@ -93,7 +93,7 @@ export const reservations: Reservation[] = [
   },
   {
     id: "r4",
-    propertySlug: "segunda-casa",
+    propertySlug: "potrerillos",
     source: "airbnb",
     checkIn: "2026-08-01",
     checkOut: "2026-08-04",

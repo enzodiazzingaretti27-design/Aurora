@@ -12,9 +12,21 @@ const languageOptions: { code: Language; label: string; flag: string }[] = [
 ];
 
 const hubCopy: Record<Language, { kicker: string; title: string; cta: string }> = {
-  en: { kicker: "Two houses", title: "Choose your stay.", cta: "Discover" },
-  es: { kicker: "Dos casas", title: "Elegí tu estadía.", cta: "Descubrir" },
-  pt: { kicker: "Duas casas", title: "Escolha sua estadia.", cta: "Descobrir" },
+  en: {
+    kicker: "Two houses in Mendoza",
+    title: "The mountain, or the vines.",
+    cta: "Discover",
+  },
+  es: {
+    kicker: "Dos casas en Mendoza",
+    title: "La montaña, o las viñas.",
+    cta: "Descubrir",
+  },
+  pt: {
+    kicker: "Duas casas em Mendoza",
+    title: "A montanha, ou as vinhas.",
+    cta: "Descobrir",
+  },
 };
 
 export default function Hub() {

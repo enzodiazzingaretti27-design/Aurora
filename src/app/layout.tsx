@@ -15,8 +15,9 @@ const interTight = Inter_Tight({
 });
 
 export const metadata: Metadata = {
-  title: "Cecilia — Hospedajes",
-  description: "Dos casas para alquilar: Aurora en Mendoza y Casa del Río.",
+  title: "Cecilia — Hospedajes en Mendoza",
+  description:
+    "Dos casas en Mendoza: Alto Dique Potrerillos, sobre el dique y frente al Cordón del Plata, y una casa en Maipú, en la cuna del Malbec.",
 };
 
 export default function RootLayout({

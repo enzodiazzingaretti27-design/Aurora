@@ -1,6 +1,6 @@
 # Cecilia — Hospedajes
 
-Sitio web para las dos casas de Cecilia. Página principal (`/`) con las dos propiedades, y una landing cinemática dedicada a cada una (`/aurora`, `/segunda-casa`).
+Sitio web para las dos casas de Cecilia, ambas en Mendoza: **Alto Dique Potrerillos** (montaña, sobre el dique) y una **casa en Maipú** (la cuna del Malbec). Página principal (`/`) con las dos propiedades, y una landing cinemática dedicada a cada una (`/potrerillos`, `/maipu`).
 
 Construido con:
 
@@ -29,8 +29,12 @@ http://localhost:3000
 - `src/app/page.tsx` — hub con las dos propiedades.
 - `src/app/[property]/page.tsx` — ruta dinámica que renderiza la landing de cada propiedad.
 - `src/components/PropertyLanding.tsx` — la plantilla visual compartida (secciones, animaciones, selector de idioma).
-- `src/data/properties/aurora.ts` — contenido real de Aurora (Mendoza).
-- `src/data/properties/segunda-casa.ts` — contenido **placeholder/temporal** de la segunda casa (marcado con TODO). Reemplazar fotos, textos y ubicación cuando estén disponibles.
+- `src/data/properties/potrerillos.ts` — Alto Dique Potrerillos (Luján de Cuyo, Mendoza).
+- `src/data/properties/maipu.ts` — la casa de Maipú.
+
+En ambos, la **geografía es real y verificable** (ubicación, altura, distancia a la ciudad, coordenadas). Lo que falta confirmar con Cecilia está marcado con `TODO` en cada archivo: el **nombre real de la casa de Maipú** (hoy "Casa Maipú" es un placeholder), las **fotos** (hoy son de picsum.photos), los **ambientes** (la sección `suites` es borrador) y el **WhatsApp** de contacto.
+
+Los textos hablan de la **zona** (que es cierta) y evitan prometer amenities que todavía no están confirmados.
 - `src/data/properties/index.ts` — registro de propiedades. Agregar una propiedad nueva es: crear su archivo de datos con el mismo shape (`PropertyData` en `src/types/property.ts`) y sumarlo acá.
 
 ## Editar contenido de una propiedad

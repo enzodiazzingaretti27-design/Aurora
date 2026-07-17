@@ -312,7 +312,7 @@ export default function PanelPage() {
                     className="border-b border-black/[0.06] last:border-0 hover:bg-black/[0.02]"
                   >
                     <td className="whitespace-nowrap px-3 py-3 text-black/70">
-                      {properties[r.propertySlug].brandName}
+                      {properties[r.propertySlug].shortName}
                     </td>
                     <td className="px-3 py-3">
                       <SourceBadge source={r.source} />

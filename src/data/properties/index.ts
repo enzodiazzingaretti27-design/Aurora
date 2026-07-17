@@ -1,10 +1,12 @@
 import type { PropertyData } from "@/types/property";
-import { auroraProperty } from "./aurora";
-import { segundaCasaProperty } from "./segunda-casa";
+import { potrerillosProperty } from "./potrerillos";
+import { maipuProperty } from "./maipu";
 
+// Las dos casas de Cecilia, ambas en Mendoza: la montaña (Potrerillos) y el
+// vino (Maipú). El orden acá define el orden en que aparecen en la portada.
 export const properties = {
-  aurora: auroraProperty,
-  "segunda-casa": segundaCasaProperty,
+  potrerillos: potrerillosProperty,
+  maipu: maipuProperty,
 } satisfies Record<string, PropertyData>;
 
 export type PropertySlug = keyof typeof properties;
